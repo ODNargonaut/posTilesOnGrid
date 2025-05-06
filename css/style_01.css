@@ -1,0 +1,1274 @@
+body 
+{
+  color: white;
+  background-color: black;
+  font-size: 140%;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 600;
+}
+
+/* === Canvas === */
+canvas 
+{
+  border: 1px solid rgb(200, 198, 198);
+  background-color: rgb(200, 198, 198);
+  margin-left: 37px;
+/*  overflow: auto;*/
+}
+/* =============== */
+
+
+/* === Text:(X),(Y) === */
+.blTCurPos
+{
+  position: absolute;
+  font-size: 65%;
+}
+/* =============== */
+
+/* === Tool Ruler:(X),(Y) === */
+.blTRuler
+{
+  position: absolute;
+  font-size: 65%;
+  margin-left: 180px;
+  display: none;
+}
+/* =============== */
+
+/* === Tools === */
+.tools
+{
+  position: absolute;
+}
+/* =============== */
+
+
+/* === Mode === */
+.mode 
+{
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  font-size: 170%;
+}
+.mode:hover 
+{
+  background-color: rgb(133, 133, 133);
+}
+.modeP
+{
+  position: absolute;
+  border: 1px solid white;
+  border-radius: 2px;
+  width: 25px;
+  height: 20px;
+  margin-left: 1px;
+  margin-top: 10px;
+  background-color: rgb(0, 0, 0);
+}
+/* =============== */
+
+
+/* === Hint === */
+.hint
+{
+  position: absolute; 
+  margin-left: 700px; 
+  margin-top: 280px;
+  font-size: 100%; 
+  color: black;
+}
+/* =============== */
+
+
+/* === Footer Panel === */
+footer
+{
+  position: absolute;
+  border: 1px solid red;
+  width: 1407px;
+  height: 30px;
+  margin-left: 35px;
+  margin-top: 20px;
+  background-color: rgb(210, 167, 39);
+}
+.DPbtn 
+{
+  width: 80px;
+  height: 23px;
+  font-size: 70%;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+/* Btn Data */
+.DownPanBtn_data
+{
+
+}
+/* Btn Grid */
+.DownPanBtn_grid
+{
+
+}
+/* Btn Add */
+.DownPanBtn_add
+{
+
+}
+/* Btn Run */
+.DownPanBtn_run
+{
+
+}
+/* Btn Save */
+.DownPanBtn_save
+{
+
+}
+
+/* === Menu Date === */
+.menuData
+{
+  position: absolute;
+  border: 5px solid rgb(76, 196, 196);
+  border-radius: 5px;
+  width: 500px;
+  height: 60px;
+  margin-top: -100px;
+  margin-left: 50px;
+  font-size: 70%;
+  background-color: black;
+  display: none;
+}
+.menuShowData
+{
+  position: absolute;
+  width: 96%;
+  margin-left: 10px;
+  margin-top: -30px;
+  font-size: 100%;
+  cursor: pointer;
+}
+.menuImpData
+{
+  position: absolute;
+  width: 96%;
+  margin-left: 10px;
+  margin-top: -8px;
+  font-size: 100%;
+  cursor: pointer;
+}
+.menuShowData:hover, .menuImpData:hover
+{
+  background-color: rgba(255, 255, 255, 0.367);
+}
+
+/* === Menu Grid === */
+.menuGrid
+{
+  position: absolute;
+  border: 5px solid rgb(76, 196, 196);
+  border-radius: 5px;
+  width: 500px;
+  height: 150px;
+  margin-top: -190px;
+  margin-left: 50px;
+  font-size: 70%;
+  background-color: black;
+  display: none;
+}
+
+/* === Run === */
+.closeBtn4
+{
+  position: absolute;
+  border: none;
+  border-top-left-radius: none;
+  border-top-right-radius: none;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: none;
+  width: 25px;
+  height: 20px;
+  margin-left: 375px;
+  cursor: pointer;
+}
+.BlockRun
+{
+  position: absolute;
+  border: 5px solid rgb(76, 196, 196);
+  border-radius: 3px;
+  width: 400px;
+  height: 550px;
+  margin-left: 80px;
+  margin-top: 70px;
+  background-color: black;
+  display: none;
+}
+.BlocktitleRun
+{
+  border: 1px solid black;
+  width: 99.5%;
+  height: 50px;
+}
+.BlockMessage
+{
+  border-top: 1px solid rgb(76, 196, 196);
+  width: 99.5%;
+  height: 350px;
+  font-size: 75%;
+  overflow-x: hidden;
+}
+.BlockHe
+{
+  border: 1px solid rgb(251, 5, 5);
+  border-radius: 5px;
+  width: 85%;
+  margin-left: 10px;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+.BlockI
+{
+  border: 1px solid rgb(32, 215, 8);
+  border-radius: 5px;
+  width: 85%;
+  margin-left: 46px;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+.BlockInputText
+{
+  position: absolute;
+  width: 95%;
+  height: 28px;
+  margin-top: 2%;
+  margin-left: 2%;
+}
+.inputText
+{
+  border: 1px solid black;
+  border-radius: 1px;
+  font-size: 85%;
+  font-weight: bold;
+  width: 91%;
+  height: 86%;
+  outline:none;
+}
+.BlockJoystick
+{
+  width: 80%;
+  margin-left: 10.5%;
+}
+.btnJoystick
+{
+  border: none;
+  border-radius: 1px;
+  font-size: 70%;
+  font-weight: bold;
+  width: 100px;
+  height: 25px;
+  cursor: pointer;
+}
+
+/* =============== */
+
+
+/* === Menu Add === */
+.menuAdd
+{
+  position: absolute;
+  border: 5px solid rgb(76, 196, 196);
+  border-radius: 5px;
+  width: 500px;
+  height: 120px;
+  margin-top: -160px;
+  margin-left: 50px;
+  font-size: 70%;
+  background-color: black;
+  display: none;
+}
+
+/* =============== */
+
+
+/* === Menu File === */
+.menuFile
+{
+  position: absolute;
+  border: 5px solid rgb(76, 196, 196);
+  border-radius: 5px;
+  width: 500px;
+  height: 120px;
+  margin-top: -160px;
+  margin-left: 50px;
+  font-size: 70%;
+  background-color: black;
+  display: none;
+}
+.importData
+{
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 100%;
+  cursor: pointer;
+  width: 96%;
+}
+.exportData
+{
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 35px;
+  font-size: 100%;
+  cursor: pointer;
+  width: 96%;
+}
+.saveData
+{
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 60px;
+  font-size: 100%;
+  cursor: pointer;
+  width: 96%;
+}
+.saveHowData
+{
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 85px;
+  font-size: 100%;
+  cursor: pointer;
+  width: 96%;
+}
+.importData:hover, .exportData:hover, .saveData:hover, .saveHowData:hover
+{
+  background-color: rgba(255, 255, 255, 0.367);
+}
+/* =============== */
+
+
+/* === DataOut === */
+.blMainData
+{
+  margin-top: 40px;
+}
+.btn 
+{
+  width: 100px;
+  height: 25px;
+  font-size: 70%;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+button:focus 
+{
+  outline: none;
+  box-shadow: none;
+}
+button:hover 
+{
+  color: rgb(255, 255, 255);
+  background-color: rgb(157, 157, 157);
+}
+/* === Блок с данными === */
+.blDataOut
+{
+  position: absolute;
+  border: 5px solid rgb(76, 196, 196);
+  border-radius: 5px;
+  width: 500px;
+  height: 500px;
+  margin-top: -580px;
+  margin-left: 500px;
+  font-size: 70%;
+  background-color: black;
+  display: none;
+}
+.dataOut
+{
+  margin-left: 15px;
+  margin-top: 210px;
+}
+.dataOut2
+{
+  font-size: 85%;
+  margin-left: 15px;
+  margin-top: 70px;
+}
+.closeBtn
+{
+  position: absolute;
+  border: none;
+  border-top-left-radius: none;
+  border-top-right-radius: none;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: none;
+  width: 25px;
+  height: 20px;
+  margin-left: 475px;
+  cursor: pointer;
+}
+.close:hover
+{
+  background-color: red;
+  color: white;
+}
+.closeBtn3
+{
+  position: absolute;
+  border: none;
+  border-top-left-radius: none;
+  border-top-right-radius: none;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: none;
+  width: 25px;
+  height: 20px;
+  margin-left: 475px;
+  cursor: pointer;
+}
+/* =============== */
+
+
+/* === Окно для испорта данных === */
+.blImportData
+{
+  position: absolute;
+  border: 5px solid rgb(76, 196, 196);
+  border-radius: 5px;
+  width: 500px;
+  height: 125px;
+  margin-top: -450px;
+  margin-left: 500px;
+  font-size: 70%;
+  background-color: black;
+  display: none;
+}
+.closeBtn2
+{
+  position: absolute;
+  border: none;
+  border-top-left-radius: none;
+  border-top-right-radius: none;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: none;
+  width: 25px;
+  height: 20px;
+  margin-left: 475px;
+  cursor: pointer;
+}
+.TImpData
+{
+  position: absolute;
+  font-size: 80%;
+  margin-left: 122px;
+  margin-top: 20px;
+}
+.inpImpData
+{
+  position: absolute;
+  border: none;
+  border-radius: 1px;
+  width: 400px;
+  height: 15px;
+  margin-left: 48px;
+  margin-top: 40px;
+  font-weight: 600;
+}
+.inpImpData:focus
+{
+  outline: none;
+  box-shadow: none;
+}
+.btnImp
+{
+  position: absolute;
+  border: none;
+  border-radius: 2px;
+  width: 390px;
+  height: 18px;
+  font-size: 75%;
+  margin-left: 54px;
+  margin-top: 65px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.errImpData
+{
+  position: absolute;
+  margin-left: 165px;
+  margin-top: 92px;
+  font-size: 80%;
+  color: red;
+  display: none;
+}
+/* =============== */
+
+
+/* === Палитра цветов === */
+.blSetColor
+{
+  position: absolute;
+  border: 5px solid rgb(76, 196, 196);
+  border-radius: 5px;
+  width: 500px;
+  height: 225px;
+  margin-top: -550px;
+  margin-left: 500px;
+  font-size: 70%;
+  background-color: black;
+  display: none;
+}
+.TPR
+{
+  position: absolute;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+.TPG
+{
+  position: absolute;
+  margin-left: 65px;
+  margin-top: 15px;
+}
+.TPB
+{
+  position: absolute;
+  margin-left: 115px;
+  margin-top: 15px;
+}
+.TPHEX
+{
+  position: absolute;
+  margin-left: 175px;
+  margin-top: 15px;
+}
+.inpPH
+{
+  border: none;
+  border-radius: 1px;
+  width: 62px;
+  height: 14px;
+  font-weight: 600;
+}
+.inpP
+{
+  border: none;
+  border-radius: 1px;
+  width: 25px;
+  height: 14px;
+  font-weight: 600;
+}
+.inpP,.inpPH:focus
+{
+  outline: none;
+  box-shadow: none;
+}
+.fillRect
+{
+  position: absolute;
+  border-radius: 2px;
+  width: 80px;
+  height: 45px;
+  margin-top: 50px;
+  margin-left: 209px;
+  background-color: rgb(0, 0, 0);
+}
+.blByDefault
+{
+  position: absolute;
+  width: 130px;
+  height: 145px;
+  margin-left: 15px;
+  margin-top: 60px;
+}
+.TByDefault
+{
+  position: absolute;
+  font-size: 72%;
+  margin-left: 36px;
+}
+.blListColorByDefault
+{
+  position: absolute;
+  width: 100px;
+  height: 126px;
+  margin-left: 15px;
+  margin-top: 18px;
+  overflow: auto;
+}
+.colByDef:hover
+{
+  background-color: green;
+}
+/*  */
+.blHistory
+{
+  position: absolute;
+  width: 130px;
+  height: 145px;
+  margin-left: 353px;
+  margin-top: 60px;
+}
+.THistory
+{
+  position: absolute;
+  font-size: 72%;
+  margin-left: 45px;
+}
+.blListColorHistory
+{
+  position: absolute;
+  width: 100px;
+  height: 126px;
+  margin-left: 15px;
+  margin-top: 18px;
+  overflow: auto;
+}
+.applyBtnSetColor
+{
+  position: absolute;
+  border: none;
+  border-radius: 2px;
+  width: 150px;
+  height: 15px;
+  font-size: 70%;
+  margin-left: 175px;
+  margin-top: 195px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.setObject
+{
+  position: absolute;
+  border: 5px solid rgb(76, 196, 196);
+  border-radius: 5px;
+  width: 99.9%;
+  height: 100px;
+  margin-top: 240px;
+  margin-left: -4px;
+  font-size: 92%;
+  background-color: black;
+  display: block;
+}
+.TNObj
+{
+  position: absolute;
+  margin-left: -40px; 
+}
+.inpNObj
+{
+  margin-left: 25px;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 1px;
+}
+.TTObj
+{
+  position: absolute;
+  margin-left: -40px;
+  margin-top: 18px;
+}
+.inpTitleObjRu
+{
+  margin-left: 50.5px;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  width: 200px;
+  border-radius: 1px;
+}
+.inpTitleObjEn
+{
+  margin-left: 50.5px;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  width: 200px;
+  border-radius: 1px;
+}
+.inpNObj,.inpTitleObjRu, .inpTitleObjEn, .inpTCreateGridLayer:focus
+{
+  outline: none;
+  box-shadow: none;
+}
+/* =============== */
+
+
+/* Информация об объекте */
+.blInfoObj
+{
+  position: absolute;
+  border: 5px solid rgb(76, 196, 196);
+  border-radius: 5px;
+  width: 500px;
+  height: 455px;
+  margin-top: -600px;
+  margin-left: 500px;
+  font-size: 70%;
+  background-color: black;
+  display: none;
+}
+.IOR
+{
+  position: absolute;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+.IOG
+{
+  position: absolute;
+  margin-left: 65px;
+  margin-top: 15px;
+}
+.IOB
+{
+  position: absolute;
+  margin-left: 115px;
+  margin-top: 15px;
+}
+.IOHEX
+{
+  position: absolute;
+  margin-left: 175px;
+  margin-top: 15px;
+}
+.inpIOH
+{
+  border: none;
+  border-radius: 1px;
+  width: 62px;
+  height: 14px;
+  font-weight: 600;
+}
+.inpIO
+{
+  border: none;
+  border-radius: 1px;
+  width: 25px;
+  height: 14px;
+  font-weight: 600;
+}
+.inpIO,.inpIOH:focus
+{
+  outline: none;
+  box-shadow: none;
+}
+.btnRuIO
+{
+  border: none;
+  border-radius: 2px;
+  position: absolute;
+  width: 25px;
+  margin-left: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+.btnEnIO
+{
+  border: none;
+  border-radius: 2px;
+  position: absolute;
+  width: 25px;
+  margin-left: 42px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+.btnSaveInfoObj
+{
+  border: none;
+  border-radius: 2px;
+  position: absolute;
+  width: 100px;
+  margin-left: 190px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+/* =============== */
+
+
+/* Слои в виде объектов */
+.blLayersObj
+{
+  position: absolute;
+  border: 5px solid rgb(76, 196, 196);
+  border-radius: 5px;
+  width: 900px;
+  height: 515px;
+  margin-top: -600px;
+  margin-left: 300px;
+  font-size: 70%;
+  background-color: black;
+  font-size: 60%;
+  display: none;
+}
+.closeBtn5
+{
+  position: absolute;
+  border: none;
+  border-top-left-radius: none;
+  border-top-right-radius: none;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: none;
+  width: 25px;
+  height: 18px;
+  margin-left: 97.2%;
+  cursor: pointer;
+}
+.listLayers
+{
+  height: 430px;
+}
+td
+{
+  border: 1px solid white;
+}
+.space
+{
+  border: none;
+}
+.trCur:hover
+{
+  cursor: pointer;
+  background-color: rgb(73, 185, 94);
+}
+/* =============== */
+
+
+/* Блок со слоями для сетки */
+.blNewGridLayer
+{
+  position: absolute;
+  border: 5px solid rgb(76, 196, 196);
+  border-radius: 5px;
+  width: 790px;
+  height: 515px;
+  margin-top: -600px;
+  margin-left: 338px;
+  font-size: 70%;
+  background-color: black;
+  font-size: 60%;
+  display: none;
+}
+.closeBtn6
+{
+  position: absolute;
+  border: none;
+  border-top-left-radius: none;
+  border-top-right-radius: none;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: none;
+  width: 25px;
+  height: 18px;
+  margin-left: 96.84%;
+  cursor: pointer;
+}
+.blListLayersGrid
+{
+  height: 333px;
+}
+.space
+{
+  border: none;
+}
+.trCur:hover
+{
+  cursor: pointer;
+  background-color: rgb(73, 185, 94);
+}
+.tdCurDel
+{
+  color: red;
+}
+.tdCurDel:hover
+{
+  cursor: pointer;
+  color: white;
+  background-color: red;
+}
+/* =============== */
+
+
+/* === Indicator === */
+.indicator-canvas 
+{
+  position: absolute;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: 27px;
+  margin-left: 5px;
+  background-size: 20px;
+  background-color: rgb(255, 21, 0);
+}
+/* =============== */
+
+
+._btn:active
+{
+  background-color: green;
+  color: white;
+}
+/* =============== */
+
+
+/* === CurrentZeroCoorAxis === */
+.currentZeroCoorAxis
+{
+  position: absolute;
+  font-size: 80%;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+/* =============== */
+
+
+/* === CurrentSZCell === */
+.currentSZCell
+{
+  position: absolute;
+  font-size: 80%;
+  margin-left: 10px;
+  margin-top: 20px;
+}
+/* =============== */
+
+
+/* === CurrentCellOffset === */
+.currentCellOffset
+{
+  position: absolute;
+  font-size: 80%;
+  margin-left: 10px;
+  margin-top: 35px;
+}
+/* =============== */
+
+
+/* === CurrentNumOfDigOftDot === */
+.currentNumOfDigOftDot
+{
+  position: absolute;
+  font-size: 80%;
+  margin-left: 10px;
+  margin-top: 50px;
+}
+/* === CellSize === */
+.cellSize
+{
+  position: absolute;
+  font-size: 80%;
+  margin-left: 10px;
+  margin-top: 75px;
+}
+.inp
+{
+  position: absolute;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid white;
+  border-radius: 2px;
+  width: 35px;
+  height: 14px;
+  margin-left: 3px;
+  margin-top: -1px;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+}
+.inp:focus
+{
+  outline: none;
+  box-shadow: none;
+}
+/* === CellOffset === */
+.cellOffset
+{
+  position: absolute;
+  font-size: 80%;
+  margin-left: 10px;
+  margin-top: 94px;
+}
+/* === NumOfDigOftDot === */
+.NumOfDigOftDot
+{
+  position: absolute;
+  font-size: 80%;
+  margin-left: 10px;
+  margin-top: 114px;
+}
+.applyBtn
+{
+  position: absolute;
+  width: 40px;
+  height: 15px;
+  font-size: 90%;
+  margin-top: 0px;
+  margin-left: 135px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+}
+/* =============== */
+
+
+/* === ShowBtn === */
+.showBtn
+{
+  position: absolute;
+  width: 90px;
+  height: 15px;
+  font-size: 80%;
+  margin-top: 145px;
+  margin-left: 10px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+}
+/* =============== */
+
+
+/* === TotalCells === */
+.totalCells
+{
+  position: absolute;
+  font-size: 80%;
+  margin-left: 15px;
+  margin-top: -40px;
+}
+/* =============== */
+
+
+/* === TextBegin 1 ===*/
+.TBegin
+{
+  position: absolute;
+  font-size: 70%; 
+  margin-left: 15px;
+  margin-top: 175px;
+}
+/* === TextEnd ===*/
+.TEnd
+{
+  font-size: 70%; 
+  margin-left: 15px;    
+}
+/* =============== */
+
+
+/* === TextBegin 2 ===*/
+.TBegin2
+{
+  position: absolute;
+  font-size: 70%; 
+  margin-left: 15px;
+  margin-top: 34px;
+}
+/* === TextEnd ===*/
+.TEnd2
+{
+  font-size: 70%; 
+  margin-left: 15px;    
+}
+/* =============== */
+
+
+/* === TExp === */
+.blCOPY
+{
+  margin-top: 10px;
+  display: block;
+}
+.TExp
+{
+  position: absolute;
+  font-size: 80%;
+  margin-left: 15px;
+  margin-top: 170px;
+}
+/* === TImp === */
+.TImp
+{
+  position: absolute;
+  font-size: 80%;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+/* =============== */
+
+
+/* === CellNW === */
+.cellNWH
+{
+  border-radius: 3px;
+  width: 120px;
+  height: 20px;
+  font-size: 100%;
+  color: black;
+  font-weight: 600;
+}
+.inpNWH:focus
+{
+  outline: none;
+  box-shadow: none;
+}
+.applyBtnNWH
+{
+  width: 200px;
+  height: 15px;
+  font-size: 86%;
+  border-radius: 2px;
+  margin-top: 8px;
+  margin-left: 27px;
+  border: none;
+  cursor: pointer;
+}
+.applyBtnNWH:focus 
+{
+  outline: 2px solid rgb(16, 246, 0); /* Жёлтый контур */
+}
+/* =============== */
+
+
+/* === CheckDrawGrid === */
+.CheckDrawGrid
+{
+  position: absolute; 
+  margin-top: 2px; 
+  margin-left: 93%;
+}
+.CheckDrawGrid:focus
+{
+  outline: none;
+  box-shadow: none;
+}
+.drawAGrid
+{
+  position: absolute;
+  font-size: 90%;
+  cursor: pointer;
+  width: 96%;
+}
+.drawAGrid:hover
+{
+  background-color: rgba(255, 255, 255, 0.367);
+}
+/* =============== */
+
+
+/* === Create layer === */
+.createLayer
+{
+  position: absolute;
+  font-size: 90%;
+  cursor: pointer;
+  width: 50%;
+}
+.currentLayer
+{
+  position: absolute;
+  font-size: 90%;
+  width: 46%;
+  margin-left: 253px;
+}
+.createLayer:hover
+{
+  background-color: rgba(255, 255, 255, 0.367);
+}
+/* =============== */
+
+
+/* === Input name for file */
+.blFileForSavaData
+{
+  position: absolute;
+  border: 5px solid rgb(76, 196, 196);
+  border-radius: 5px;
+  width: 300px;
+  height: 65px;
+  margin-top: -105px;
+  margin-left: 570px;
+  background-color: black;
+  display: none;
+}
+.inpTextFForDt
+{
+  position: absolute;
+  border: none;
+  border-radius: 1px;
+  font-weight: bold;
+  font-size: 65%;
+  outline: none;
+  width: 275px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.btnSvHow
+{
+  position: absolute;
+  border: none;
+  border-radius: 3px;
+  width: 80px;
+  font-size: 62%;
+  margin-left: 110px;
+  margin-top: 35px;
+  cursor: pointer;
+}
+.errSvNameF
+{
+  position: absolute;
+  color: #FF1C00;
+  font-size: 65%;
+  margin-left: 15px;
+  margin-top: 38px;
+  display: none;
+}
+/* =============== */
+
+
+/* === InpAddCom === */
+.InpAddCom
+{
+  border: none;
+  border-radius: 2px;
+  width: 100px;
+  height: 18px;
+  font-size: 130%;
+  color: black;
+  font-weight: 600;
+}
+.InpAddCom:focus
+{
+  outline: none;
+  box-shadow: none;
+}
+/* =============== */
+
+
+/* === MainScroll === */
+/* ширина прокрутки */
+.mainScroll::-webkit-scrollbar 
+{
+  width: 10px;
+  height: 10px;
+}
+ 
+/* цвет заднего фона прокрутки */ 
+.mainScroll::-webkit-scrollbar-track
+{
+  background-color: rgb(220, 220, 220);
+}
+ 
+/* цвет бегунка в поле */ 
+.mainScroll::-webkit-scrollbar-thumb 
+{
+  width: 0px;
+  background-color: rgb(133, 129, 129);
+}
+/* =============== */

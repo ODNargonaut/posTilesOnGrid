@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Position tiles on grid</title>
+    <link rel="stylesheet" type="text/css" href="./css/style_01.css">
+    <script type="text/javascript" src="./Js/DataBase/jQuery.js"></script>
+  </head>
+  <body>
+    <div class="blTCurPos">
+      <span id="psX">X: null</span>
+      <span id="psY">Y: null</span>
+    </div>
+    <div id="blTRuler" class="blTRuler">
+      <code id="distFixXY">Вкл: Расстояние/Фиксация точек.</code>
+    </div>
+    <br />
+    <div class="tools">
+      <img title="keydown (B)" class="mode" id="modeB" src="./img/tools/paintBrush.png" /><br />
+      <img title="keydown (C)" class="mode" id="modeC" src="./img/tools/brush-tool.png" /><br />
+      <img title="keydown (A)" class="mode" id="modeA" src="./img/tools/drawingByArea.png" /><br />
+      <img title="keydown (Shift)" class="mode" id="modeShift" src="./img/tools/drag-and-drop.png" /><br />
+      <img title="keydown (H)" class="mode" id="modeH" src="./img/tools/hand.png" /><br />
+      <img title="keydown (D)" class="mode" id="modeD" src="./img/tools/eraset.png" /><br />
+      <img title="keydown (F)" class="mode" id="modeF" src="./img/tools/color-picker.png" /><br />
+      <img title="keydown (R)" class="mode" id="modeR" src="./img/tools/ruler.png" /><br />
+      <img title="keydown (E)" class="mode" id="modeE" src="./img/tools/shape.png" /><br />
+      <img style="cursor: pointer;" class="mode" id="modeL" src="./img/tools/layers.png" onclick="show('Layers')" /><br />
+      <img style="cursor: pointer;" class="modeP" id="fillRectMini" onclick="show('setClr')" />
+      <!-- <span title="keydown (B)" class="mode" id="modeB">B</span><br />
+      <span title="keydown (C)" class="mode" id="modeC">C</span><br /> -->
+      <!-- <span title="keydown (A)" class="mode" id="modeA">A</span><br /> -->
+      <!-- <span title="keydown (H)" class="mode" id="modeH">H</span><br />
+      <span title="keydown (D)" class="mode" id="modeD">D</span><br />
+      <span style="cursor: pointer;" class="mode modeP" id="modeP" onclick="show(3)">P</span> -->
+    </div>
+    <h2 id="hint" class="hint">Press the (Q) key</h2>
+    <div id="Run" class="BlockRun">
+      <button title="close the window" class="closeBtn4 close" onclick="hide('Run')">X</button>
+      <div class="BlocktitleRun">
+        <h4 style="margin: 10px; text-align: center;">[ Text game ]</h4>
+      </div>
+      <div class="BlockMessage mainScroll">
+        <br />
+        <div class="BlockHe" style="height: 65px;">
+          <span>Вы только что запустили игру, пожалуйста продолжайте играть и дальше.</span>
+        </div>
+        <br />
+        <div class="BlockI" style="height: 65px;">
+          <span>Старанно, но я не понимаю как в нее играть!?</span>
+        </div>
+        <br />
+        <div class="BlockHe" style="height: 65px;">
+          <span>Вы только что запустили игру, пожалуйста продолжайте играть и дальше.</span>
+        </div>
+        <br />
+        <div class="BlockI" style="height: 65px;">
+          <span>Старанно, но я не понимаю как в нее играть!?</span>
+        </div>
+        <br />
+        <div class="BlockI" style="height: 65px;">
+          <span>Старанно, но я не понимаю как в нее играть!?</span>
+        </div>
+      </div>
+      <div class="BlockInputText">
+        <input class="inputText" type="text" placeholder="Написать сообщение..." />
+        <button style="font-size: 88%; margin-left: -3px; border: none; border-top-right-radius: 1px; border-bottom-right-radius: 1px ; cursor: pointer;">></button>
+      </div>
+      <br />
+      <br />
+      <div class="BlockJoystick">
+        <button class="btnJoystick" style="width: 97.8%;">Действие</button>
+        <br />
+        <button class="btnJoystick">-90°</button>
+        <button class="btnJoystick">Up</button>
+        <button class="btnJoystick">+90°</button>
+        <br />
+        <button class="btnJoystick">Left</button>
+        <button class="btnJoystick">Down</button>
+        <button class="btnJoystick">Right</button>
+      </div>
+    </div>
+    <div id="hiddenBlock" style="position: absolute; width: 1407px; height: 714px; margin-left: 37px; display: block;"></div>
+    <canvas id="canvas" width="1405" height="712" onmouseover="cursorOnCanvas(true)" onmouseout="cursorOnCanvas(false)"></canvas>
+    <br />
+    <span title="keydown (Q)" id="ind" class="indicator-canvas"></span>
+    <div id="menuData" class="menuData">
+      <div class="blMainData">
+        <h5 class="menuShowData" onclick="show('dtOut')">Show data </h5>
+        <h5 class="menuImpData" onclick="show('ImpDt')">Import data</h5>
+      </div>
+    </div>
+    <div id="menuGrid" class="menuGrid">
+      <div style="position: absolute; margin-top: 10px; margin-left: 10px; width: 100%;">
+        <span id="createLayer" class="createLayer" onclick="show('newGridLayer')">Create or select new grid layer?</span>
+        <span class="currentLayer">current grid layer [ <span id="currentLayer">0</span> ]</span>
+      </div>
+      <div style="position: absolute; margin-top: 40px; margin-left: 10px; width: 100%;">
+        <span id="CheckDrawGrid" class="drawAGrid">Draw a grid?</span>
+        <span id="CheckDrawGridIndicator" style="
+          position: absolute; 
+          width: 10px; 
+          height: 10px; 
+          background-color: rgb(0, 255, 47);
+          margin-left: 93%;
+          margin-top: 3px;
+          border-radius: 5px;"></span>
+      </div>
+      <div style="position: absolute; margin-top: 60px; margin-left: 10px;">
+        <span style="font-size: 90%;">Number of cells by width and height:</span><br />
+        <input id="cellNW" class="cellNWH inpNWH" type="text" placeholder="cellNW" value="60" />
+        <input id="cellNH" class="cellNWH inpNWH" type="text" placeholder="cellNH" value="30" /><br />
+        <button id="" class="_btn applyBtnNWH" onclick="">apply</button><br />
+        <span id="errNNotDivi" style="display: none; color: red; font-size: 55%; margin-left: 17px; margin-top: 4px;">
+          The number is not divisible by two without remainder!
+        </span>
+        <div style="
+          position: absolute;
+          background-color: rgba(240, 248, 255, 0.245); 
+          width: 104%; 
+          height: 78px;
+          margin-top: -70px;
+          margin-left: -5px;
+          border-radius: 2px;"></div>
+      </div>
+    </div>
+    <div id="menuAdd" class="menuAdd">
+      <div style="position: absolute; margin-top: 10px; margin-left: 10px;">
+        <span style="font-size: 90%;">
+          Add comments: <input id="InpAddCom" class="InpAddCom" type="text" placeholder="text" />
+        </span>
+        <button id="CheckAddCom" class="_btn" style="
+          font-size: 100%;
+          width: 25px;
+          margin-left: 10px;
+          cursor: pointer;
+          border: none;
+          border-radius: 2px;">+</button>
+      </div>
+      <div style="
+        position: absolute;
+        background-color: rgba(240, 248, 255, 0.245); 
+        width: 96.5%; 
+        height: 28px;
+        margin-top: 7px;
+        margin-left: 8px;
+        border-radius: 2px;"></div>
+    </div>
+    <div id="menuFile" class="menuFile">
+      <div id="fileCommands" style="display: block;">
+        <code id="importData" class="importData" onclick="fileCommand('import')">Import</code>
+        <code id="exportData" class="exportData" onclick="fileCommand('export')">Export</code>
+        <code id="saveData" class="saveData" onclick="fileCommand('save')">Save</code>
+        <code id="saveHowData" class="saveHowData" onclick="fileCommand('saveHow')">Save how</code>
+      </div>
+      <div id="sendingAndResponding" style="display: none;">
+        <code id="pause" class="loading"></code>
+        <code id="receiveAnswer" class="receiveAnswer"></code>
+        <style>
+          .hidden
+          {
+            display: none;
+          }
+
+          .receiveAnswer
+          {
+            position: absolute;
+            margin-left: 10px;
+            margin-top: 10px;
+          }
+    
+          .loading 
+          {
+            position: absolute;
+            margin-left: 10px;
+            margin-top: 10px;
+            clip-path: inset(0 3ch 0 0);
+            animation: l 1s steps(4) infinite;
+          }
+    
+          @keyframes l {
+            to {
+              clip-path: inset(0 -1ch 0 0)
+            }
+          }
+        </style>
+      </div>
+      <div id="ifServerOnline" style="
+        position: absolute; 
+        width: 490px;
+        height: 110px;
+        margin-left: 5px;
+        margin-top: 5px;
+        background-color: rgb(0, 0, 0);
+        display: none;">
+      <code style="position: absolute; margin-left: 80px; margin-top: 40px; font-size: 110%;">Эти ф-ии не доступны в ofline режиме!</code> 
+      </div>
+    </div>
+    <div id="blDataOut" class="blDataOut">
+      <button title="close the window" class="closeBtn close" onclick="hide('dtOut')">X</button>
+      <div class="mainScroll" stwyle="position: absolute; width: 500px; height: 470px; margin-top: 20px; overflow: auto;">
+        <span class="cellSize">
+          Optional: set the cell size (w/h).
+          <span style="margin-left: 68px;">W = 
+            <input id="inpW" type="text" placeholder="n" class="inp" />
+            <span style="margin-left: 50px;">H = <input id="inpH" type="text" placeholder="n" class="inp" /></span>
+          </span>
+        </span>
+        <span class="cellOffset">
+          Optional: set offset along the axes (X,Y). 
+          <span style="margin-left: 18px;">X =
+            <input id="inpX" type="text" placeholder="n" class="inp" />
+            <span style="margin-left: 50px;">Y = <input id="inpY" type="text" placeholder="n" class="inp" /></span>
+          </span>
+        </span>
+        <span class="NumOfDigOftDot">
+          Optional: set number of digits after the dot. N =
+          <input id="inpN" type="text" placeholder="n" class="inp" style="margin-left: 6px;" />
+          <button class="applyBtn _btn" onclick="apply()">apply</button>
+        </span>
+        <span class="currentZeroCoorAxis">Current zero coordinates on the axis: X=0 Y=0</span>
+        <span class="currentSZCell">Current cell size: <span id="currentSZCell">W=null H=null</span></span>
+        <span class="currentCellOffset">Current cell offset: <span id="currentCellOffset">X=null Y=null</span></span>
+        <span class="currentNumOfDigOftDot">Current number of digits after the dot: <span id="currentNumOfDigOftDot">null</span></span>
+        <button class="showBtn _btn" onclick="dataOut()">Show</button>
+        <span class="TExp">Data for export:</span><br />
+        <span class="TBegin">=== Begin ===</span>
+        <div id="data-out" class="dataOut"></div><br />
+        <span class="TEnd">=== End ===</span><br />
+        <div id="btnCOPY" class="blCOPY">
+          <span class="totalCells">Total cells: <span id="totalCells">0</span></span>
+        </div>
+        <span class="TImp">Data for import:</span>
+        <span class="TBegin2">=== Begin ===</span>
+        <div id="data-out2" class="dataOut2"></div><br />
+        <span class="TEnd2">=== End ===</span><br />
+      </div>
+    </div>
+    <div id="blImportData" class="blImportData">
+      <button title="close the window" class="closeBtn2 close" onclick="hide('ImpDt')">X</button>
+      <span class="TImpData">Paste the data to import into the input line.</span>
+      <input id="dataForImp" type="text" class="inpImpData" placeholder="data for import" />
+      <button class="btnImp _btn" onclick="dataImport()">import</button>
+      <span id="errImpData" class="errImpData">Error: incorrect data entered!</span>
+    </div>
+    <div id="blSetColor" class="blSetColor">
+      <button title="close the window" class="closeBtn3 close" onclick="hide('setClr')">X</button>
+      <div style="margin-left: 110px;">
+        <span class="TPR">R <input id="inpPR" class="inpP" type="text" placeholder="n" maxlength="3" value="130" /></span>
+        <span class="TPG">G <input id="inpPG" class="inpP" type="text" placeholder="n" maxlength="3" value="70"  /></span>
+        <span class="TPB">B <input id="inpPB" class="inpP" type="text" placeholder="n" maxlength="3" value="190" /></span>
+        <span class="TPHEX">HEX <input id="inpPHEX" class="inpPH" type="text" placeholder="n" maxlength="7" value="#8246BE" readonly="readonly" /></span>
+      </div>
+      <span id="fillRect" class="fillRect"></span>
+      <div class="blByDefault">
+        <span class="TByDefault">By default:</span>
+        <div id="blListColorByDefault" class="blListColorByDefault mainScroll" style="font-size: 80%; line-height: 140%;"></div>
+      </div>
+      <div class="blHistory">
+        <span class="THistory">History:</span>
+        <div id="blListColorHistory" class="blListColorHistory mainScroll" style="font-size: 80%; line-height: 140%;"></div>
+      </div>
+      <div style="position: absolute; margin-left: 180px; margin-top: 110px;">
+        <input id="rangeR" type="range" min="0" max="255" value="130" style="cursor: pointer;" /><br />
+        <input id="rangeG" type="range" min="0" max="255" value="70"  style="cursor: pointer;" /><br />
+        <input id="rangeB" type="range" min="0" max="255" value="190" style="cursor: pointer;" />
+      </div>
+      <span id="errReservedClr" style="
+        position: absolute; 
+        margin-left: 173px;
+        margin-top: 175px;
+        font-size: 73%;
+        display: none;
+        color: red;">Этот цвет зарезервирован!</span>
+      <button class="_btn applyBtnSetColor" onclick="setColor()">apply</button>
+      <div class="setObject">
+        <div style="margin-left: 130px; margin-top: 20px;">
+          <span class="TNObj">Number: <input id="inpNObj" class="inpNObj" type="text" placeholder="number" /></span><br />
+          <span id="titleRu" class="TTObj" style="display: block;">Title: 
+            <input id="inpTitleObjRu" class="inpTitleObjRu" type="text" placeholder="Заголовок" />
+          </span>
+          <span id="titleEn" class="TTObj" style="display: none;">Title: 
+            <input id="inpTitleObjEn" class="inpTitleObjEn" type="text" placeholder="title" />
+          </span>
+          <div style="position: absolute; margin-top: 5px; margin-left: 260px;">
+            <button class="btnTitleRu _btn" onclick="titleOnRuOrEn('ru')">ru</button>
+            <button class="btnTitleEn _btn" onclick="titleOnRuOrEn('en')">en</button>
+            <style>
+              .btnTitleRu
+              {
+                border: none;
+                border-radius: 2px;
+                position: absolute;
+                width: 25px;
+                margin-left: 10px;
+                margin-top: 15px;
+                cursor: pointer;
+              }
+              .btnTitleEn
+              {
+                border: none;
+                border-radius: 2px;
+                position: absolute;
+                width: 25px;
+                margin-left: 42px;
+                margin-top: 15px;
+                cursor: pointer;
+              }
+            </style>
+          </div>
+          <div id="errSetObj" style="position: absolute; margin-top: 43px; margin-left: 72px; display: none;">
+            <span style="color: red; font-size: 12px;">Error in: [Number] or [Title].</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="blInfoObj" id="blInfoObj">
+      <div style="margin-left: 165px;">
+        <span class="IOR">R <input id="inpIOR" class="inpIO" type="text" readonly="readonly" /></span>
+        <span class="IOG">G <input id="inpIOG" class="inpIO" type="text" readonly="readonly" /></span>
+        <span class="IOB">B <input id="inpIOB" class="inpIO" type="text" readonly="readonly" /></span>
+      </div>
+      <div style="margin-top: 50px; margin-left: 10px;">
+        <span id="IOPosULCGXY">ULCG-x: null ULCG-y: null</span><br />
+        <span id="IOPosWorldXY">World-x: null World-y: null</span>
+      </div>
+      <div style="margin-top: 10px; margin-left: 30px;">
+        <span>N: <input id="inpION" class="inpION" type="text" /></span>
+        <style>
+          .inpION
+          {
+            border: none;
+            border-radius: 1px;
+            width: 430px;
+            height: 16px;
+            font-size: 14px;
+            font-weight: 600;
+          }
+        </style>
+      </div>
+      <div id="infoRu">
+        <div style="margin-top: 10px; margin-left: 10px;">
+          <span>Title: <input id="inpIOTRu" class="inpIOTRu" type="text" placeholder="заголовок" /></span>
+          <style>
+            .inpIOTRu
+            {
+              border: none;
+              border-radius: 1px;
+              width: 430px;
+              height: 16px;
+              font-size: 14px;
+              font-weight: 600;
+            }
+          </style>
+        </div>
+        <div style="margin-top: 15px; margin-left: 10px;">
+          <span>Description:</span><br />
+          <textarea id="inpIODescriptRu" placeholder="описание"></textarea>
+          <style>
+            textarea
+            {
+              border: none;
+              border-radius: 1px;
+              width: 97%;
+              height: 220px;
+              font-weight: 600;
+              resize: none;
+            }
+            .inpION, .inpIOTRu, textarea:focus
+            {
+              outline: none;
+              box-shadow: none;
+            }
+          </style>
+        </div>
+      </div>
+      <div id="infoEn" style="display: none;">
+        <div style="margin-top: 10px; margin-left: 10px;">
+          <span>Title: <input id="inpIOTEn" class="inpIOTEn" type="text" placeholder="title" /></span>
+          <style>
+            .inpIOTEn
+            {
+              border: none;
+              border-radius: 1px;
+              width: 430px;
+              height: 16px;
+              font-size: 14px;
+              font-weight: 600;
+            }
+          </style>
+        </div>
+        <div style="margin-top: 15px; margin-left: 10px;">
+          <span>Description:</span><br />
+          <textarea id="inpIODescriptEn" placeholder="description"></textarea>
+          <style>
+            textarea
+            {
+              border: none;
+              border-radius: 1px;
+              width: 97%;
+              height: 220px;
+              font-weight: 600;
+              resize: none;
+            }
+            .inpION, .inpIOTEn, textarea:focus
+            {
+              outline: none;
+              box-shadow: none;
+            }
+          </style>
+        </div>
+      </div>
+      <button class="btnRuIO _btn" onclick="infoOnRuOrEn('ru')">ru</button>
+      <button class="btnEnIO _btn" onclick="infoOnRuOrEn('en')">en</button>
+      <button class="btnSaveInfoObj _btn" onclick="setObj()">Save</button>
+      <style>
+        .errInfoObj
+        {
+          position: absolute; 
+          margin-left: 320px; 
+          margin-top: 17px;
+          color: red;
+          font-size: 12px;
+          display: none;
+        }
+        .OkInfoObj
+        {
+          position: absolute; 
+          margin-left: 345px; 
+          margin-top: 17px;
+          color: rgb(0, 255, 0);
+          font-size: 12px;
+          display: none;
+        }
+      </style>
+      <span id="errIO" class="errInfoObj">Изменения не сохранены</span>
+      <span id="okIO" class="OkInfoObj">Данные сохранены</span>
+    </div>
+    <div id="blLayersObj" class="blLayersObj">
+      <span id="selObj" style="position: absolute; color: rgb(0, 255, 0); margin-left: 15px; margin-top: 5px; display: none;">
+        Был выбран объект: N = <span id="selObjN">null</span>
+      </span>
+      <code id="currentObj" style="position: absolute; color: white; margin-left: 355px; margin-top: 5px; display: none; font-size: 120%;">
+        current Number: [<span id="currentObjN">0</span>]
+      </code>
+      <button title="close the window" class="closeBtn5 close" onclick="hide('Layers')">X</button>
+      <br />
+      <table style="margin-left: 15px; margin-top: 10px;">
+        <tbody>
+          <tr>
+            <td align="center" width="100" style="background-color: rgb(148, 145, 145);">N</td>
+            <td align="center" width="650" style="background-color: rgb(215, 150, 53); letter-spacing: 1px;">Title</td>
+            <td align="center" width="100" style="background-color: rgb(198, 79, 32);">RGB</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="mainScroll" 
+        style="position: absolute; 
+               width: 96.5%; 
+               height: 445px; 
+               margin-left: 15px; 
+               margin-top: 10px;
+              
+               border-radius: 3px; 
+               overflow: auto;">
+        <div id="listLayers" class="listLayers" style="width: 865px;">
+          <table>
+            <tbody id="listLayersObj"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div id="blNewGridLayer" class="blNewGridLayer">
+      <button title="close the window" class="closeBtn6 close" onclick="hide('newGridLayer')">X</button>
+      <br />
+      <div style="position: absolute; margin-left: 192px; margin-top: -15px; width: 405px; height: 130px;">
+        <code id="okCrtLayerG" style="position: absolute; color: rgb(38, 226, 38); letter-spacing: 0.5px; margin-left: 119px; margin-top: 5px; display: none;">
+          A layer has been created!
+        </code>
+        <code id="errCrtLayerG" style="position: absolute; color: rgb(226, 38, 38); letter-spacing: 0.5px; margin-left: 80px; margin-top: 5px; display: none;">
+          Error: a layer not has been created!
+        </code>
+        <code style="position: absolute; margin-left: 120px; margin-top: 28px; font-size: 120%;">Create new grid layer:</code>
+        <input id="inpCrtNewTitleLayerG" class="inpTCreateGridLayer" style="
+          position: absolute; 
+          margin-top: 58px;
+          padding-left: 3px;
+          width: 400px;
+          border: none;
+          border-radius: 1px;
+          font-weight: bold;
+          letter-spacing: 0.5px;
+          font-size: 110%;" type="text" placeholder="Title" />
+        <button style="
+          position: absolute;
+          border: none;
+          border-radius: 3px;
+          width: 150px; 
+          margin-top: 93px;
+          margin-left: 130px;
+          letter-spacing: 0.5px;
+          cursor: pointer;" class="_btn" id="btnCreateNewLayerGrid">create layer</button>
+      </div>
+      <code id="selLayerG" style="position: absolute; color: rgb(0, 255, 0); margin-left: 15px; margin-top: 95px; font-size: 110%; display: none;">
+        Был выбран слой: N = <code id="selLayerGN">null</code>
+      </code>
+      <table style="margin-left: 15px; margin-top: 120px;">
+        <tbody>
+          <tr>
+            <td align="center" width="100" style="background-color: rgb(128, 127, 130);">Layer</td>
+            <td align="center" width="650" style="background-color: rgb(42, 174, 55); letter-spacing: 1px;">Title</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="mainScroll" 
+        style="position: absolute; 
+               width: 96.5%; 
+               height: 335px; 
+               margin-left: 15px; 
+               margin-top: 10px;
+               overflow: auto;">
+        <div id="blListLayersGrid" class="blListLayersGrid" style="width: 760px;">
+          <table>
+            <tbody id="listLayersGrid"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div id="blFileForSavaData" class="blFileForSavaData">
+      <input id="inpTextFForDt" class="inpTextFForDt" type="text" placeholder="Name" />
+      <button class="btnSvHow _btn" onclick="setNameForFileSave()">save</button>
+      <code id="errSvNameF" class="errSvNameF">Length < 0</code>
+    </div>
+    <footer> 
+      <button class="DownPanBtn_data _btn DPbtn" onclick="show('menuData')">Data</button>
+      <button class="DownPanBtn_grid _btn DPbtn" onclick="show('menuGrid')">Grid</button>
+      <button class="DownPanBtn_add  _btn DPbtn" onclick="show('menuAdd')">Add</button>
+      <button class="DownPanBtn_run  _btn DPbtn" onclick="show('Run')">Run</button>
+      <button class="DownPanBtn_file _btn DPbtn" onclick="show('menuFile')">File</button>
+      <button class="DownPanBtn_help _btn DPbtn" onclick="show('help')">Help</button>
+      <button onclick="arrGrid()">canvas-grid</button>
+    </footer>
+    <!-- <br />
+    <br />
+    <br />
+    <pre style="color: white;">
+<span id="arrGrid"></span>
+    </pre> -->
+    <script type="text/javascript">
+
+      // 
+      function arrGrid()
+      {
+        let ggrid = grid.grid;
+        let str = "tiles.size = "+palette.tiles.get(palette.currentList)[1].size+"<br /><br />";
+        let counter = 1;
+        for (let k of palette.tiles.get(palette.currentList)[1].keys())
+        {
+          let iCell = palette.tiles.get(palette.currentList)[1].get(k);
+          str += "["+counter+"] ";
+          
+          str += "ULCGx="+iCell.upperLeftCornerOfGrid.x;
+          str += " ULCGy="+iCell.upperLeftCornerOfGrid.y+" | ";
+          
+          str += "wx="+iCell.world.x;
+          str += " wy="+iCell.world.y+" | ";
+
+          str += "keyOnGrid: x="+iCell.keyOnGrid.x;
+          str += " y="+iCell.keyOnGrid.y+"<br />";
+
+          counter++;
+        }
+        str += "<br /><br />W: "+ggrid[1].length+" H: "+ggrid.length+"<br />";
+        for (let y = 0; y < ggrid.length; y++)
+        {
+          str += "["+y+"] ";
+          for (let x = 0; x < ggrid[y].length; x++)
+          {
+            if (ggrid[y][x] === "")
+              str += "-, ";
+            else 
+              str += ggrid[y][x]+", ";
+          }
+          str += "<br />";
+        }
+        document.getElementById("arrGrid").innerHTML = str;
+      }
+
+      // == == == Drag and Drop == == ==
+      // let WDAndD = document.getElementById("Run");
+
+      // WDAndD.onmousedown = function(e)
+      // {
+      //   let shiftX = e.clientX - WDAndD.getBoundingClientRect().left;
+      //   let shiftY = e.clientY - WDAndD.getBoundingClientRect().top;
+
+      //   WDAndD.style.position = 'absolute';
+      //   WDAndD.style.zIndex = 1000;
+      //   document.body.append(WDAndD);
+
+      //   moveAt(e.pageX, e.pageY);
+
+      //   // переносит на координаты (pageX, pageY),
+      //   // дополнительно учитывая изначальный сдвиг относительно указателя мыши
+      //   function moveAt(pageX, pageY) {
+      //     WDAndD.style.left = pageX - shiftX + 'px';
+      //     WDAndD.style.top = pageY - shiftY + 'px';
+      //   }
+
+      //   function onMouseMove(e) {
+      //     moveAt(e.pageX, e.pageY);
+      //   }
+
+      //   // передвигаем при событии mousemove
+      //   document.addEventListener('mousemove', onMouseMove);
+
+      //   // отпустить, удалить ненужные обработчики
+      //   WDAndD.onmouseup = function() {
+      //     document.removeEventListener('mousemove', onMouseMove);
+      //     WDAndD.onmouseup = null;
+      //   };
+      // };
+      // WDAndD.ondragstart = function() { return false; };
+      // == == == == == ==
+
+
+      let canvas = document.getElementById("canvas");
+      let ctx = canvas.getContext("2d");
+
+      let canvasWidth = ctx.canvas.width;
+      let canvasHeight = ctx.canvas.height;
+
+      // 
+      function setValueForCell(id, st, n1, n2=null) 
+      {
+        let ID = document.getElementById(id);
+        switch (st)
+        {
+          case "wh": ID.innerHTML = "W="+n1+" H="+n2; break;
+          case "xy": ID.innerHTML = "X="+n1+" Y="+n2; break;
+          default:
+            ID.innerHTML = n1;
+            break;
+        }
+      }
+
+      // Выкл/вкл. сетку
+      document.getElementById("CheckDrawGrid").addEventListener("click", () => 
+      {
+        if (activeDrawGrid)
+        {
+          document.getElementById("CheckDrawGridIndicator").style.backgroundColor = "red";
+          cellSZNotFrame--;
+          activeDrawGrid = false;
+        }
+        else if (!activeDrawGrid)
+        {
+          document.getElementById("CheckDrawGridIndicator").style.backgroundColor = "rgb(0, 255, 47)";
+          cellSZNotFrame++;
+          activeDrawGrid = true;
+        }
+      });
+
+      // Создать новый слой сетки
+      document.getElementById("btnCreateNewLayerGrid").addEventListener("click", () => 
+      {
+        let newTitle = document.getElementById("inpCrtNewTitleLayerG").value;
+        let err = {e: OK};
+        if (newTitle.trim().length === 0) console.log("Error Title: "+(err.e=ELEN));
+
+        if (err.e === OK)
+        {
+          let nextN = ""+palette.tiles.size;
+          palette.tiles.set(nextN, [newTitle, new Map()]);
+          palette.selectTilesList(nextN);
+          
+          // Создаем новый буфер для новой сетки
+          buffer.objs.set(nextN, []);
+
+          getLayersObj("listLayersGrid", palette.tiles);
+
+          document.getElementById("errCrtLayerG").style.display = "none";
+          document.getElementById("okCrtLayerG").style.display = "block";
+        }
+        else 
+        {
+          document.getElementById("okCrtLayerG").style.display = "none";
+          document.getElementById("selLayerG").style.display = "none";
+          document.getElementById("errCrtLayerG").style.display = "block";
+        }
+
+        document.getElementById("inpCrtNewTitleLayerG").value = "";
+      });
+
+      // Добавить комментарий
+      // document.getElementById("CheckAddCom").addEventListener("click", () => 
+      // {
+      //   if (!comments.active)
+      //     comments.active = true;
+      //   else if (comments.active)
+      //   {
+      //     comments.active = false;
+      //     document.getElementById("InpAddCom").value = "";
+      //   }
+      // });
+    </script>
+    <!-- DataBase -->
+    <script type="text/javascript" src="./Js/DataBase/canvas.js"></script>
+    <script type="text/javascript" src="./Js/DataBase/magicNumbers.js"></script>
+    <script type="text/javascript" src="./Js/DataBase/DPTools.js"></script>
+    <script type="text/javascript" src="./Js/DataBase/comments.js"></script>
+    <script type="text/javascript" src="./Js/DataBase/grid.js"></script>
+    <script type="text/javascript" src="./Js/DataBase/mouse.js"></script>
+    <script type="text/javascript" src="./Js/DataBase/camera.js"></script>
+    <script type="text/javascript" src="./Js/DataBase/palette.js"></script>
+    <script type="text/javascript" src="./Js/DataBase/gridObjs.js"></script>
+    <script type="text/javascript" src="./Js/DataBase/layersObj.js"></script>
+    <script type="text/javascript" src="./Js/DataBase/tools.js"></script>
+    <script type="text/javascript" src="./Js/DataBase/buffer.js"></script>
+    <script type="text/javascript" src="./Js/DataBase/dataImp.js"></script>
+    <!-- === -->
+      
+    <!-- Main -->
+    <script type="text/javascript" src="./Js/main/cursor.js"></script>
+    <script type="text/javascript" src="./Js/main/dpTools.js"></script>
+    <script type="text/javascript" src="./Js/main/keyboard.js"></script>
+    <!-- <script type="text/javascript" src="./Js/main/setGridSize.js"></script> -->
+    <script type="text/javascript" src="./Js/main/addComments.js"></script>
+    <!-- === -->
+
+    <!-- Tools -->
+    <script type="text/javascript" src="./Js/tools/brush.js"></script>
+    <script type="text/javascript" src="./Js/tools/hand.js"></script>
+    <!-- <script type="text/javascript" src="./Js/tools/scale.js"></script> -->
+    <script type="text/javascript" src="./Js/tools/eraset.js"></script>
+    <script type="text/javascript" src="./Js/tools/drawingByArea.js"></script>
+    <script type="text/javascript" src="./Js/tools/dragAndDrop.js"></script>
+    <script type="text/javascript" src="./Js/tools/infoObject.js"></script>
+    <script type="text/javascript" src="./Js/tools/setColor.js"></script>
+    <script type="text/javascript" src="./Js/tools/colorPicker.js"></script>
+    <script type="text/javascript" src="./Js/tools/stepBack.js"></script>
+    <script type="text/javascript" src="./Js/tools/getLayersObj.js"></script>
+    <script type="text/javascript" src="./Js/tools/ruler.js"></script>
+    <!-- === -->
+
+    <!-- DataOfTiles -->
+    <script type="text/javascript" src="./Js/dataOfTiles/cell.js"></script>
+    <script type="text/javascript" src="./Js/dataOfTiles/dataOut.js"></script>
+    <script type="text/javascript" src="./Js/dataOfTiles/dataImp.js"></script>
+    <!-- <script type="text/javascript" src="./Js/dataOfTiles/copyData.js"></script> -->
+    <!-- === -->
+
+    <!-- Start -->
+    <script type="text/javascript" src="./Js/start.js"></script>
+    <!-- === -->
+        
+    <script type="text/javascript">
+      // Предупредить перед обновлением страницы
+      window.onbeforeunload = function () { return ""; };
+
+      // 
+      function show(w)
+      {
+        if (!saveExpImp.active)
+        {
+          switch(w)
+          {
+            case "dtOut":  // Открыть блок с выводом данных
+            {
+              if (palette.tiles.get(palette.currentList)[1].size >= zero)
+              {
+                clsOpnMenu();
+                document.getElementById("blDataOut").style.display = "block"
+                document.getElementById("data-out").innerHTML = "";
+                document.getElementById("data-out2").innerHTML = "";
+                dataOutWindow = true;
+                pauseOFF();
+              }
+              break;
+            }
+            case "ImpDt":  // Открыть окно для импорта данных
+            {
+              clsOpnMenu();
+              document.getElementById("blImportData").style.display = "block";
+              document.getElementById("dataForImp").value = "";
+              dataOutWindow = true;
+              pauseOFF();
+              break;
+            }
+            case "setClr":  // Открыть палитру цветов
+            {
+              if (!gridObjs.openWindow && !layersObj.openWindow)
+              {
+                document.getElementById("blSetColor").style.display = "block";
+                dataOutWindow = true;
+                pauseOFF();
+              }
+              break;
+            }
+            case "menuData":  // Откырыть меню-блок с разедлами
+            {
+              if (!gridObjs.openWindow && !layersObj.openWindow)
+              {
+                clsOpnMenu("data")
+                document.getElementById("menuData").style.display = "block";
+                dataOutWindow = true;
+                DPTools.data.active = true;
+                pauseOFF();
+              }
+              break;
+            }
+            case "menuGrid":  // Открыть меню-блок с разделами
+            {
+              if (!gridObjs.openWindow && !layersObj.openWindow)
+              {
+                clsOpnMenu("grid")
+                document.getElementById("menuGrid").style.display = "block";
+                dataOutWindow = true;
+                DPTools.grid.active = true;
+                pauseOFF();
+              }
+              break;
+            }
+            case "newGridLayer":
+            {
+              clsOpnMenu("menuGrid");
+              document.getElementById("blNewGridLayer").style.display = "block";
+              dataOutWindow = true;
+              getLayersObj("listLayersGrid", palette.tiles);
+              pauseOFF();
+              break;
+            }
+            case "menuAdd":  // Открыть меню-блок с разделами
+            {
+              if (!gridObjs.openWindow && !layersObj.openWindow)
+              {
+                clsOpnMenu("add")
+                document.getElementById("menuAdd").style.display = "block";
+                dataOutWindow = true;
+                DPTools.add.active = true;
+                pauseOFF();
+              }
+              break;
+            }
+            case "Run":  // Открыть окно-эмулятор текстовой игры
+            {
+              if (!gridObjs.openWindow && !layersObj.openWindow)
+              {
+                document.getElementById("Run").style.display = "block";
+                dataOutWindow = true;
+                pauseOFF();
+              }
+              break;
+            }
+            case "Layers":  // Показать список объектных слоев
+            {
+              if (!gridObjs.openWindow)
+              {
+                document.getElementById("blLayersObj").style.display = "block";
+                document.getElementById("currentObj").style.display = "block";
+                document.getElementById("currentObjN").innerHTML = gridObjs.selected.N;
+                dataOutWindow = true;
+                layersObj.openWindow = true;
+                getLayersObj();
+                pauseOFF();
+              }
+              break;
+            }
+            case "menuFile":  // Открыть меню-блок с разделами
+            {
+              if (!gridObjs.openWindow && !layersObj.openWindow)
+              {
+                clsOpnMenu("file")
+                document.getElementById("menuFile").style.display = "block";
+                dataOutWindow = true;
+                DPTools.file.active = true;
+                pauseOFF();
+              }
+              break;
+            }
+            case "help":  // Перейти к справочному руководству по использованию
+            {
+              window.open("./help.html");
+              break;
+            }
+          }
+        }
+      }
+
+      // 
+      function hide(w)
+      {
+        if (!saveExpImp.active)
+        {
+          switch(w)
+          {
+            case "dtOut":  // Скрыть блок с выводом данных
+            {
+              document.getElementById("btnCOPY").style.display = "none";
+              document.getElementById("blDataOut").style.display = "none";
+              dataOutWindow = false;
+              // cell.dataOutExp.marks = "";
+              // cell.dataOutExp.notMarks = "";
+              // cell.dataOutImp = "";
+              break;
+            }
+            case "ImpDt":  // Скрыть окно для импорта данных
+            {
+              document.getElementById("blImportData").style.display = "none";
+              dataOutWindow = false;
+              break;
+            }
+            case "setClr":  // Скрыть палитру цветов
+            {
+              document.getElementById("blSetColor").style.display = "none";
+              dataOutWindow = false;
+              let currentColor = palette.color.current;
+              if (currentColor != idHEX.value)
+              {
+                idR.value = palette.color.R;
+                idG.value = palette.color.G;
+                idB.value = palette.color.B;
+                idHEX.value = palette.color.current;
+
+                setColor("", "-1");
+              }
+              titleOnRuOrEn("ru");
+              document.getElementById("inpNObj").value = "";
+              document.getElementById("inpTitleObjRu").value = "";
+              document.getElementById("inpTitleObjEn").value = "";
+              document.getElementById("errSetObj").style.display = "none";
+              break;
+            }
+            case "Run":  // Скрыть окно-эмулятор текстовой игры
+            {
+              document.getElementById("Run").style.display = "none";
+              dataOutWindow = false;
+              break;
+            }
+            case "Layers":  // Скрыть список объектных слоев
+            {
+              document.getElementById("selObj").style.display = "none";
+              document.getElementById("selObjN").innerHTML = "null";
+              document.getElementById("currentObj").style.display = "none";
+              
+              document.getElementById("blLayersObj").style.display = "none";
+              
+              dataOutWindow = false;
+              layersObj.openWindow = false;
+              break;
+            }
+            case "newGridLayer":
+            {
+              document.getElementById("errCrtLayerG").style.display = "none";
+              document.getElementById("okCrtLayerG").style.display = "none";
+              document.getElementById("selLayerG").style.display = "none";
+
+              document.getElementById("blNewGridLayer").style.display = "none";
+              dataOutWindow = false;
+              break;
+            }
+          }
+        }
+      }
+    
+      // 
+      function setDoSignCoord(bool)
+      {
+        doNeedToSignCoord = bool;
+        setValueForCell("currentValue", "-", (doNeedToSignCoord?1:0));
+      }
+
+      // 
+      function apply()
+      {   
+        let w = Number(document.getElementById("inpW").value.trim());
+        let h = Number(document.getElementById("inpH").value.trim());
+
+        let x = Number(document.getElementById("inpX").value.trim());
+        let y = Number(document.getElementById("inpY").value.trim());
+
+        let N = Number(document.getElementById("inpN").value.trim());
+
+        let pli = false;
+                
+        if (w > zero && h > zero)
+        {
+          cell.w = w;
+          cell.h = h;
+
+          document.getElementById("inpW").value = "";
+          document.getElementById("inpH").value = "";
+
+          setValueForCell("currentSZCell", "wh", w, h);
+          pli = true;
+        }
+
+        if (x > zero && y > zero)
+        {
+          cell.offset.x = x;
+          cell.offset.y = y;
+
+          document.getElementById("inpX").value = "";
+          document.getElementById("inpY").value = "";
+
+          setValueForCell("currentCellOffset", "xy", x, y);
+          pli = true;
+        }
+
+        if (N > zero)
+        {
+          numOfDigitsAfterDot = N;
+          document.getElementById("inpN").value = "";
+          setValueForCell("currentNumOfDigOftDot", "-", N);
+          pli = true;
+        }
+
+        if (pli) dataOut();
+      }
+
+      setValueForCell("currentSZCell", "wh", cell.w, cell.h);
+      setValueForCell("currentCellOffset", "xy", cell.offset.x, cell.offset.y);
+      setValueForCell("currentNumOfDigOftDot", "-", numOfDigitsAfterDot);
+
+      listColorByDefalut();
+
+      // Для блокировки выделения текста
+      // document.ondragstart=noselect;
+      // document.onselectstart=noselect;
+      // document.oncontextmenu=noselect;
+      // function noselect(){return false;}
+    </script>
+    <div id="imgDivBock" style="position: absolute; display: block;"></div>
+    <script type="text/javascript">
+      // Проверяем, работает ли 'posTilesOnGrid' в online или в ofline?
+      // (function ifServerOnline()
+      // {
+      //   var img = document.getElementById("imgDivBock").appendChild(document.createElement("img"));
+        
+      //   img.onload = () => { console.log("OK"); };
+      //   img.onerror = () => 
+      //   {
+      //     console.log("error server");
+      //     document.getElementById("ifServerOnline").style.display = "block";
+      //   };
+        
+      //   img.src = "./php/ifServerOnline/001.png";
+      //   document.getElementById("imgDivBock").style.display = "none";
+      // }());
+    </script>
+    <script type="text/javascript" src="./Js/file/fileData.js"></script>
+    <script type="text/javascript">
+
+      let saveHow = {active: false};
+      let strImpExp = {active: false};
+      // 
+      function setNameForFileSave()
+      {
+        let err = {e:OK};
+        let str = document.getElementById("inpTextFForDt").value;
+        
+        if (str.length === 0)
+        {
+          document.getElementById("errSvNameF").style.display = "block";
+          console.log("Error [nameFile]: "+(err.e = ELEN));
+        }
+
+        if (err.e === OK)
+        {
+          if (!strImpExp.active)
+            NAMEFILEFORSAVE = str;
+          else
+            NAMEFILEFORIMPEXP = str;
+
+          document.getElementById("inpTextFForDt").value = "";
+          document.getElementById("blFileForSavaData").style.display = "none";
+          document.getElementById("errSvNameF").style.display = "none";
+
+          if (saveHow.active)
+          {
+            filedt.actionCommand("save");
+            saveHow.active = false;
+          }
+
+          if (strImpExp.active) strImpExp.active = false;
+        }
+      }
+
+      // 
+      function fileCommand(command)
+      {
+        switch(command)
+        {
+          case "save":
+          {
+            if (NAMEFILEFORSAVE.length > 0) filedt.actionCommand("save");
+            else 
+              document.getElementById("blFileForSavaData").style.display = "block";
+            break;
+          }
+          case "saveHow":
+          {
+            saveHow.active = true;
+            document.getElementById("blFileForSavaData").style.display = "block";
+            break;
+          }
+          case "import":
+          {
+            if (NAMEFILEFORIMPEXP.length > 0) filedt.actionCommand("import");
+            else 
+            {
+              strImpExp.active = true;
+              document.getElementById("blFileForSavaData").style.display = "block";
+            }
+            break;
+          }
+          case "export":
+          {
+            if (NAMEFILEFORIMPEXP.length > 0) filedt.actionCommand("export");
+            else 
+            {
+              strImpExp.active = true;
+              document.getElementById("blFileForSavaData").style.display = "block";
+            }
+            break;
+          }
+          default:
+            console.log("Команда не определена!");
+        }
+      }
+    </script>
+  </body>
+</html>
